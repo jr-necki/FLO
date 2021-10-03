@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@+id/album_arrow_back_ib"
+        android:src="@drawable/btn_arrow_black"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <ImageView
+        android:id="@+id/album_more_iv"
+        android:src="@drawable/btn_player_more"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <ImageView
+        android:id="@+id/album_like_off_ib"
+        android:src="@drawable/ic_my_like_off"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/album_more_iv"/>
+    <TextView
+        android:id="@+id/album_name_tv"
+        android:text="BTS 2021 ALBUM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        app:layout_constraintTop_toBottomOf="@+id/album_like_off_ib"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:id="@+id/album_singer_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="방탄소년단"
+        app:layout_constraintTop_toBottomOf="@+id/album_name_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/album_info_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2021.03.25 | 정규 | 댄스 팝"
+        app:layout_constraintTop_toBottomOf="@+id/album_singer_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@+id/album_info_tv"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    >
+
+</LinearLayout>
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="10dp"
+        android:id="@+id/image_layout"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/album_info_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:contentPadding="0dp"
+        app:cardBackgroundColor="#fff"
+        app:strokeColor="#ffff"
+        >
+       <ImageView
+           android:id="@+id/album_albumCover_iv"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:scaleType="fitEnd"
+           android:src="@drawable/img_album_exp"/>
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/album_lp_iv"
+        android:layout_width="50dp"
+        android:layout_height="200dp"
+        android:src="@drawable/img_album_lp"
+        app:layout_constraintStart_toEndOf="@id/image_layout"
+        app:layout_constraintTop_toTopOf="@+id/image_layout" />
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:id="@+id/album_songs_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="수록곡"
+        android:textColor="@color/purple_500"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@+id/image_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"/>
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:id="@+id/album_detailInfo_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="상세정보"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@+id/image_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:id="@+id/album_video_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="영상"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@+id/image_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"/>
+
+    <View
+        android:id="@+id/song_selectedline_v"
+        android:layout_width="40dp"
+        android:layout_height="2dp"
+        android:background="@color/purple_500"
+        app:layout_constraintTop_toBottomOf="@+id/album_songs_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="15dp"
+        app:layout_constraintHorizontal_bias="0.1"/>
+    <View
+        android:id="@+id/song_line_v"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        app:layout_constraintTop_toBottomOf="@+id/song_selectedline_v"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        android:background="@color/black"
+        app:layout_goneMarginTop="0dp"/>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
