@@ -24,8 +24,25 @@ class AlbumFragment : Fragment(){
                 .replace(R.id.main_frm, HomeFragment())
                 .commitAllowingStateLoss()
         }
-
+        binding.albumToggleIv.setOnClickListener {
+            setMix(false)
+        }
+        binding.albumToggleOnIv.setOnClickListener {
+            setMix(true)
+        }
         //activity에서 setContentView와 같음음
        return binding.root
     }
+
+    private fun setMix(b: Boolean) {
+        if(b){
+            binding.albumToggleIv.visibility=View.VISIBLE;
+            binding.albumToggleOnIv.visibility=View.GONE;
+        }else{
+            binding.albumToggleIv.visibility=View.GONE;
+            binding.albumToggleOnIv.visibility=View.VISIBLE;
+        }
+
+    }
+
 }

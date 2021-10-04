@@ -3,12 +3,16 @@ package com.example.flo
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flo.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+    var isPlay: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -27,6 +31,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SongActivity::class.java)
             intent.putExtra("title",song.title)
             intent.putExtra("singer",song.singer)
+            intent.putExtra("isPlay",isPlay)
             startActivity(intent)
         }
 
@@ -67,6 +72,19 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+    private fun setPlayNow(b: Boolean): Boolean {
+        if(b){//이미 재생중이라면
+            binding.mainMiniplayerBtn.visibility=View.GONE
+            binding.mainPauseBtn.visibility = View.VISIBLE
+        }else{// 이미 정지중이라면
+            binding.mainMiniplayerBtn.visibility=View.VISIBLE
+            binding.mainPauseBtn.visibility=View.GONE
+        }
+        return isPlay
+
+    }
+
 
     private fun initNavigation() {
         supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment())

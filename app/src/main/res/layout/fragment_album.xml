@@ -190,6 +190,14 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="50dp"
                 android:layout_height="20dp"/>
+            <ImageView
+                android:id="@+id/album_toggle_on_iv"
+                android:src="@drawable/btn_toggle_on"
+                app:layout_constraintStart_toEndOf="@id/album_myLike_tv"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:visibility="gone"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

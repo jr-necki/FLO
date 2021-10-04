@@ -33,7 +33,40 @@ class SongActivity : AppCompatActivity() { // : extends라는 뜻
         binding.songPauseIv.setOnClickListener{
             setPlayerStatus(true);
         }
+        binding.songRepeatIv.setOnClickListener{
+            setPlayRepeat(false)
+        }
+        binding.songRepeatLightIv.setOnClickListener{
+            setPlayRepeat(true)
+        }
+        binding.songRandomIv.setOnClickListener{
+            setPlayRandom(false)
+        }
+        binding.songRandomLightIv.setOnClickListener {
+            setPlayRandom(true)
+        }
     }
+
+    private fun setPlayRandom(isRandom: Boolean) {
+        if(isRandom){
+            binding.songRandomIv.visibility=View.VISIBLE;
+            binding.songRandomLightIv.visibility=View.GONE;
+        }else{
+            binding.songRandomIv.visibility=View.GONE;
+            binding.songRandomLightIv.visibility=View.VISIBLE;
+        }
+    }
+
+    private fun setPlayRepeat(isRepeat: Boolean) {
+        if(isRepeat){
+            binding.songRepeatIv.visibility=View.VISIBLE;
+            binding.songRepeatLightIv.visibility=View.GONE;
+        }else{
+            binding.songRepeatIv.visibility=View.GONE;
+            binding.songRepeatLightIv.visibility=View.VISIBLE;
+        }
+    }
+
     fun setPlayerStatus (isPlaying : Boolean){
         if(isPlaying){
             binding.songPlayIv.visibility = View.VISIBLE;
