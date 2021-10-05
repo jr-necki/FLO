@@ -1,7 +1,9 @@
 package com.example.flo
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +12,7 @@ import com.example.flo.databinding.ActivitySongBinding
 
 class SongActivity : AppCompatActivity() { // : extends라는 뜻
     lateinit var binding : ActivitySongBinding
-
+    var isPlay : Boolean=false;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // binding 초기화
@@ -18,12 +20,18 @@ class SongActivity : AppCompatActivity() { // : extends라는 뜻
         // root-> 최상단 뷰
         setContentView(binding.root)
 
-        if(intent.hasExtra("title") && intent.hasExtra("singer")){
+        if(intent.hasExtra("title") && intent.hasExtra("singer") && intent.hasExtra("isPlay")){
             binding.songTitleTv.text = intent.getStringExtra("title")
             binding.songSingerTv.text = intent.getStringExtra("singer")
+
+           isPlay = intent.getBooleanExtra("isPlay",true)
+            setPlayerStatus(!isPlay)
         }
 
         binding.songArrowDownIb.setOnClickListener{ // mainActivity로 이동
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("isPlay",isPlay)
+            startActivity(intent)
             finish();
         }
         binding.songPlayIv.setOnClickListener{

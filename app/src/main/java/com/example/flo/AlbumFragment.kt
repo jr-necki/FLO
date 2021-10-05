@@ -30,6 +30,22 @@ class AlbumFragment : Fragment(){
         binding.albumToggleOnIv.setOnClickListener {
             setMix(true)
         }
+        binding.albumListSong01Layout.setOnClickListener {
+        val text : String =binding.albumSongTitle01.text.toString()+"-"+binding.albumSongSinger01.text.toString();
+            Toast.makeText(activity,"🎶 "+text,Toast.LENGTH_SHORT).show()
+        }
+        binding.albumListSong02Layout.setOnClickListener {
+            val text : String =binding.albumSongTitle02.text.toString()+"-"+binding.albumSongSinger02.text.toString();
+            Toast.makeText(activity,"🎶 "+text,Toast.LENGTH_SHORT).show()
+        }
+        binding.albumListSong03Layout.setOnClickListener {
+            val text : String =binding.albumSongTitle03.text.toString()+"-"+binding.albumSongSinger03.text.toString();
+            Toast.makeText(activity,"🎶 "+text,Toast.LENGTH_SHORT).show()
+        }
+        binding.albumListSong04Layout.setOnClickListener {
+            val text : String =binding.albumSongTitle04.text.toString()+"-"+binding.albumSongSinger04.text.toString();
+            Toast.makeText(activity,"🎶 "+text,Toast.LENGTH_SHORT).show()
+        }
         //activity에서 setContentView와 같음음
        return binding.root
     }

@@ -19,10 +19,33 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+        if(intent.hasExtra("isPlay")){
+            isPlay = intent.getBooleanExtra("isPlay",false);
+            if(!isPlay){
+                binding.mainMiniplayerBtn.visibility = View.VISIBLE;
+                binding.mainPauseBtn.visibility = View.GONE;
+            }else{
+                binding.mainMiniplayerBtn.visibility = View.GONE;
+                binding.mainPauseBtn.visibility = View.VISIBLE;
+            }
+        }
+
         val song = Song(binding.mainMiniPlayerTitleTv.text.toString(),
         binding.mainMiniPlayerSingerTv.text.toString())
 
         Log.d("Log test",song.singer + song.title)
+
+        binding.mainMiniplayerBtn.setOnClickListener {
+            binding.mainMiniplayerBtn.visibility = View.GONE;
+            binding.mainPauseBtn.visibility = View.VISIBLE;
+            isPlay = true;
+        }
+        binding.mainPauseBtn.setOnClickListener {
+            binding.mainMiniplayerBtn.visibility = View.VISIBLE;
+            binding.mainPauseBtn.visibility = View.GONE;
+            isPlay= false;
+        }
+
 
         // 작업할 레이아웃과 바인딩
         binding.mainPlayerLayout.setOnClickListener{
@@ -72,19 +95,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
-    private fun setPlayNow(b: Boolean): Boolean {
-        if(b){//이미 재생중이라면
-            binding.mainMiniplayerBtn.visibility=View.GONE
-            binding.mainPauseBtn.visibility = View.VISIBLE
-        }else{// 이미 정지중이라면
-            binding.mainMiniplayerBtn.visibility=View.VISIBLE
-            binding.mainPauseBtn.visibility=View.GONE
-        }
-        return isPlay
-
-    }
-
 
     private fun initNavigation() {
         supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment())
