@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.flo.databinding.FragmentHomeBinding
+import com.google.android.material.tabs.TabLayoutMediator
 
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
-
+    val infomation = arrayListOf("","","")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,6 +34,13 @@ class HomeFragment : Fragment() {
 
         binding.homeBannerVp.adapter = bannerAdapter
         binding.homeBannerVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+        val homeAdapter = HomeViewPagerAdapter(this)
+        binding.homeContentVp.adapter = homeAdapter
+        TabLayoutMediator(binding.homeTb, binding.homeContentVp){
+            tab,position ->
+            tab.text = infomation[position]
+        }.attach()
         return binding.root
     }
 
