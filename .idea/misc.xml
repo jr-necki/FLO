@@ -9,11 +9,14 @@
         <entry key="..\:/Users/hongeunseo/AndroidStudioProjects/FLO/FLO/app/src/main/res/drawable/round_corner.xml" value="0.17222222222222222" />
         <entry key="..\:/Users/hongeunseo/AndroidStudioProjects/FLO/FLO/app/src/main/res/layout/activity_main.xml" value="0.32407407407407407" />
         <entry key="..\:/Users/hongeunseo/AndroidStudioProjects/FLO/FLO/app/src/main/res/layout/activity_song.xml" value="0.22" />
-        <entry key="..\:/Users/hongeunseo/AndroidStudioProjects/FLO/FLO/app/src/main/res/layout/fragment_album.xml" value="0.27808988764044945" />
+        <entry key="..\:/Users/hongeunseo/AndroidStudioProjects/FLO/FLO/app/src/main/res/layout/fragment_album.xml" value="0.1" />
         <entry key="..\:/Users/hongeunseo/AndroidStudioProjects/FLO/FLO/app/src/main/res/layout/fragment_banner.xml" value="0.1" />
         <entry key="..\:/Users/hongeunseo/AndroidStudioProjects/FLO/FLO/app/src/main/res/layout/fragment_detail.xml" value="0.1" />
         <entry key="..\:/Users/hongeunseo/AndroidStudioProjects/FLO/FLO/app/src/main/res/layout/fragment_home.xml" value="0.1" />
-        <entry key="..\:/Users/hongeunseo/AndroidStudioProjects/FLO/FLO/app/src/main/res/layout/fragment_locker.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/hongeunseo/AndroidStudioProjects/FLO/FLO/app/src/main/res/layout/fragment_locker.xml" value="0.22" />
+        <entry key="..\:/Users/hongeunseo/AndroidStudioProjects/FLO/FLO/app/src/main/res/layout/fragment_lockerfile.xml" value="0.1" />
+        <entry key="..\:/Users/hongeunseo/AndroidStudioProjects/FLO/FLO/app/src/main/res/layout/fragment_lockersong.xml" value="0.1" />
+        <entry key="..\:/Users/hongeunseo/AndroidStudioProjects/FLO/FLO/app/src/main/res/layout/fragment_lockersongfile.xml" value="0.11930091185410334" />
         <entry key="..\:/Users/hongeunseo/AndroidStudioProjects/FLO/FLO/app/src/main/res/layout/fragment_look.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/hongeunseo/AndroidStudioProjects/FLO/FLO/app/src/main/res/layout/fragment_media.xml" value="0.1" />
         <entry key="..\:/Users/hongeunseo/AndroidStudioProjects/FLO/FLO/app/src/main/res/layout/fragment_song.xml" value="0.22" />

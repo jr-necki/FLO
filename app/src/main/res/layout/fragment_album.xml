@@ -98,6 +98,7 @@
         app:layout_constraintTop_toTopOf="@+id/image_layout" />
 
     <com.google.android.material.tabs.TabLayout
+        android:layout_marginTop="15dp"
         android:id="@+id/album_content_tb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
