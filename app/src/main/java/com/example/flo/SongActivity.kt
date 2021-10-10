@@ -30,7 +30,7 @@ class SongActivity : AppCompatActivity() { // : extends라는 뜻
 
         binding.songArrowDownIb.setOnClickListener{ // mainActivity로 이동
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("isPlay",isPlay)
+            intent.putExtra("isPlay",!isPlay)
             startActivity(intent)
             finish();
         }
