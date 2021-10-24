@@ -1,1 +1,0 @@
-export default()=>"How To Use KATI??";
