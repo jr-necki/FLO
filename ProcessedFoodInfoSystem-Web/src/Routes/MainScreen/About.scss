@@ -1,0 +1,23 @@
+@import 'styles/utils';
+
+.aboutDev {
+  width: 100%;
+  margin-top: 3%;
+  .devCon {
+    width: 100%;
+    margin-top: 5%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+  }
+  .devCaption {
+    color: $orange;
+    font-weight: bold;
+    font-size: 33px;
+  }
+  .carousel-control-next-icon,
+  .carousel-control-prev-icon {
+    filter: invert(80%) !important;
+  }
+}

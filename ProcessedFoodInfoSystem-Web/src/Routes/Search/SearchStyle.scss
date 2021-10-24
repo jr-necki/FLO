@@ -1,0 +1,118 @@
+@import './src/styles/utils';
+hr{
+  background-color: gray;
+}
+.category__container{
+  margin: 20px auto 0;
+  .container {
+    display: grid;
+    width: 100%;
+    align-items: stretch;
+    justify-items: stretch;
+    font-weight: 700;
+    .item__header {
+      margin-top: 10%;
+      width: 100%;
+      border: 0;
+      display: grid;
+      grid-template-columns: 2fr 4fr 1fr;
+
+      .input {
+        text-align: center;
+        margin-top: 2px;
+        font-size: x-large;
+        border: 3px solid rgba(237, 47, 59, 0.9);
+      }
+
+      .searchBtn {
+        border: 0;
+        background: 0;
+      }
+    }
+
+    .result_allergy {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .allergyBtn {
+        width: 40px;
+        height: 40px;
+        outline: 0;
+        border: 0;
+      }
+    }
+
+    .item__main {
+      display: grid;
+      column-gap: 2%;
+      grid-template-columns: 1fr 3fr;
+      place-items: start;
+      margin-top: 5%;
+
+      .category {
+        background-color: rgba(237, 47, 59, 0.9);
+        color: white;
+
+      }
+
+      .item__items {
+        display: grid;
+        grid-template-rows: 1fr 2fr;
+        align-items: center;
+      }
+
+
+    }
+
+    .sortBy {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      margin: 20px;
+
+      .result {
+        font-size: x-large;
+        display: flex;
+      }
+    }
+    .form-check__group {
+      display: table;
+      flex-direction: row;
+
+      .filterIcon {
+        margin-right: 10px;
+
+        display: table-cell;
+      }
+
+      .form-check {
+        font-size: medium;
+        vertical-align: middle;
+        display: table-cell;
+      }
+
+      .form-check-label {
+        margin-right: 10px;
+      }
+    }
+  }
+  .bigCategoryBtn {
+    font-weight: 700;
+  }
+  .category__btn{
+    font-weight: 700;
+  }
+  .form-check-label{
+    font-weight: 700;
+  }
+  .category__line{
+    margin-bottom: 2px;
+  }
+  .category__btn{
+    margin-bottom: 2px;
+    font-size: x-large !important;
+  }
+}
+.hr__search{
+  background-color: gray;
+}

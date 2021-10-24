@@ -1,0 +1,12 @@
+.result__show{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5%;
+    .form-check__group{
+        display: flex;
+        flex-direction: row;
+        .form-check-label{
+            margin-right:2px;
+        }
+    }
+}

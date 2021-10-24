@@ -1,0 +1,77 @@
+@import "./src/styles/utils";
+
+.DeleteUser {
+  .container {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 30px;
+  }
+
+  .title {
+    padding-left: 20px;
+    padding-bottom: 15px;
+    font-size: x-large;
+    font-weight: bold;
+  }
+
+  .card-title {
+    font-size: large;
+  }
+
+  .loadingSpinner {
+    margin-top: 10px;
+    color: $lightorange !important;
+  }
+
+  .submitButton {
+    margin-top: 10px;
+    background-color: $red;
+    border-color: $red;
+    color: white;
+
+    &:hover, &:focus, &:active {
+      background-color: transparent !important;
+      color: $red !important;
+      border-color: $red !important;
+    }
+  }
+
+  input::-webkit-input-placeholder {
+    font-size: 90%;
+  }
+
+  input::-moz-placeholder {
+    font-size: 90%;
+  }
+
+  input:-ms-input-placeholder {
+    font-size: 90%;
+  }
+
+  input:-moz-placeholder {
+    font-size: 90%;
+  }
+
+  input::placeholder {
+    font-size: 90%;
+  }
+
+  .deleteUSerAlert {
+    .alertTitle {
+      font-size: large;
+      font-weight: 700;
+      margin-top: 1%;
+      margin-bottom: 1%;
+    }
+
+    .lead {
+        font-size: medium;
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+  }
+  .passwordLabel{
+    margin-bottom: 1%;
+  }
+
+}

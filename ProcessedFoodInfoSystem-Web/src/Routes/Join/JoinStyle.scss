@@ -1,0 +1,75 @@
+@import './src/styles/utils';
+.joinPage {
+  width: 100%;
+  margin-top: 5%;
+  .container {
+    width: 30%;
+  }
+  .title {
+    font-family: 'MPb';
+    font-size: 20px;
+    margin-bottom: 2%;
+    font-weight: 700;
+  }
+  .inputLabel {
+    width: 100%;
+  }
+  .birthGroup {
+    font-family: 'MPl';
+    font-size: 15px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: gray;
+  }
+  .regiButton {
+    text-align: center;
+    .btn__cancle,
+    .btn__join
+    {
+      width: 120px;
+      height: 40px;
+      border: 0px;
+      outline: 0px;
+      font-size: medium;
+    }
+    .btn__cancle{
+      background-color: white;
+      border: 1px solid rgba(240, 96, 106, 1);
+      color:rgba(240, 96, 106, 1);
+      
+    }
+    .btn__join{
+      background-color: rgba(240, 96, 106, 1);
+      color: white;
+     
+    }
+  }
+
+  .pickerRow {
+    width: 100%;
+    margin: auto;
+
+    .birthDayPicker {
+      width: 100%;
+
+      input {
+        width: 100%;
+        height: 38px;
+        border: #c7ced4 1px solid;
+        border-radius: 0.25rem;
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: medium;
+      }
+    }
+
+    .react-datepicker__day--selected {
+      background-color: $lightorange !important;
+    }
+
+    .react-datepicker__day--keyboard-selected {
+      background-color: $yellow !important;
+    }
+  }
+}

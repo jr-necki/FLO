@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+        initNavigation()
 
         if(intent.hasExtra("isPlay")){
             isPlay = intent.getBooleanExtra("isPlay",false);
@@ -30,8 +31,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val song = Song(binding.mainMiniPlayerTitleTv.text.toString(),
-        binding.mainMiniPlayerSingerTv.text.toString())
+        //val song = Song(binding.mainMiniPlayerTitleTv.text.toString(),
+       //binding.mainMiniPlayerSingerTv.text.toString())
+
+        val song = Song("라일락","아이유",215,false)
+
 
         Log.d("Log test",song.singer + song.title)
 
@@ -54,11 +58,12 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SongActivity::class.java)
             intent.putExtra("title",song.title)
             intent.putExtra("singer",song.singer)
-            intent.putExtra("isPlay",isPlay)
+            intent.putExtra("playTime",song.playTime)
+            intent.putExtra("isPlay",song.isPlaying)
             startActivity(intent)
         }
 
-        initNavigation()
+
 
         binding.mainBnv.setOnItemSelectedListener {
             when (it.itemId) {

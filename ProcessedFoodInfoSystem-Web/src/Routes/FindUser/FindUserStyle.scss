@@ -1,0 +1,72 @@
+@import './src/styles/utils';
+
+
+.loading__now{
+ display: absolute;
+ top: 50%;
+ left: 50%;
+}
+.loading__ui{
+  opacity: 0.7;
+  color:rgba(0, 0, 0, 0.5);
+}
+.FindUser {
+  width: 500px;
+  font-family: 'MPl';
+  margin: 11% auto auto;
+
+  .title {
+    padding-left: 20px;
+    padding-bottom: 15px;
+    font-size: x-large;
+    font-weight: bold;
+    font-family: 'MPb';
+  }
+
+  .card-title {
+    font-size: large;
+  }
+
+  .loadingSpinner {
+    //margin-top: 10px;
+    color: $lightorange !important;
+  }
+
+  .formGroup {
+    display: table-cell;
+  }
+
+  .inputEmail {
+    vertical-align: middle;
+    width: 82%;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 3%;
+  }
+
+  .buttonArea {
+    vertical-align: middle;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    .submitButton {
+      background-color: white;
+      border-color: $lightorange;
+      color: $lightorange;
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: $lightorange !important;
+        color: white !important;
+        border-color: $lightorange !important;
+      }
+    }
+  }
+
+  .alertArea {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 82%;
+  }
+}

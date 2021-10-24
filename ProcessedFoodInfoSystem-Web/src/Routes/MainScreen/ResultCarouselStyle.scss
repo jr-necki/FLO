@@ -1,0 +1,85 @@
+@import "./src/styles/utils";
+
+.ResultCarousel{
+  //.result__container {
+  //  margin: 0;
+  //}
+  display: block;
+  height: 250px;
+
+  .card-body {
+    height: 250px;
+    width: 202px;
+    align-items: center;
+    justify-items: center;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-rows: 3fr 1fr 1fr;
+    border-bottom: 1px solid rgba(238, 238, 238, 1);
+
+    .card-link {
+      display: grid;
+      align-items: center;
+      justify-items: center;
+      height: 250px;
+      width: 202px;
+
+      img {
+        width: 150px;
+        height: 150px;
+      }
+      .foodImg {
+        border: 0;
+        margin: 0;
+
+      }
+
+      .card-title {
+        align-items: center;
+        text-align: center;
+        margin: 0;
+      }
+
+      .starScore {
+        //margin-bottom: 50px;
+        text-align: center;
+
+      }
+
+      .card-text {
+        margin-top: 1px;
+      }
+    }
+
+
+  }
+
+  .card-link:hover {
+    box-shadow: 2px 2px 5px 4px rgba(1, 1, 1, 0.3);
+
+  }
+
+  .carousel {
+    height: 100%;
+    width: 100%;
+
+    .carousel-inner, .carousel-item, .ranking {
+      height: 250px;
+
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+      border-radius: 0.25rem;
+    }
+  }
+
+  .carousel-control-next-icon,
+  .carousel-control-prev-icon,
+  .carousel-indicators {
+    filter: invert(50%) !important;
+  }
+}

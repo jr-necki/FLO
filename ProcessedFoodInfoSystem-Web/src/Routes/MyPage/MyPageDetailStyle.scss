@@ -1,0 +1,164 @@
+@import './src/styles/utils';
+
+.myPageDetail {
+
+  margin: 5% auto auto;
+
+  display: flex;
+  justify-content: center;
+
+  .shownPage {
+    font-family: 'MPb';
+    font-size: x-large;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .line__divider {
+    background-color: rgba(232, 232, 232, 1);
+  }
+
+  .allergy__section {
+    display: flex;
+    flex-direction: row;
+
+    .allergyItem {
+      display: flex;
+      width: 200px;
+    }
+  }
+
+
+  .userAllergyArea {
+    .title {
+      font-size: x-large;
+      margin-bottom: 2%;
+    }
+
+    .allergyItem {
+      display: inline-block;
+      background-color: white;
+      margin-right: 1%;
+      font-size: medium;
+      margin-top: 1%;
+    }
+  }
+
+  .reviewTable {
+    font-size: small;
+    margin-top: 15px;
+    table-layout: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+    .starRating {
+      margin: auto;
+    }
+
+    .deleteButton {
+      background-color: transparent;
+      border-color: $lightorange;
+      color: rgba(240, 96, 106, 1);
+      margin: 0;
+      padding: 0;
+      border-top-width: 0;
+      border-left-width: 0;
+      border-bottom-width: 0;
+      border-right-width: 0;
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: transparent !important;
+        color: rgba(240, 96, 106, 1) !important;
+        border-color: $lightorange !important;
+      }
+    }
+
+    .editButton {
+      background-color: transparent;
+      border-color: darkblue;
+      color: darkblue;
+      padding: 0;
+      margin: 0 5px 0 0;
+      border-top-width: 0;
+      border-left-width: 0;
+      border-bottom-width: 0;
+      border-right-width: 0;
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: transparent !important;
+        color: darkblue !important;
+        border-color: darkblue !important;
+      }
+    }
+
+    .editCancelButton {
+      background-color: transparent;
+      border-color: $lightorange;
+      color: rgba(240, 96, 106, 1);
+      margin: 0;
+      padding: 0;
+      border-top-width: 0;
+      border-left-width: 0;
+      border-bottom-width: 0;
+      border-right-width: 0;
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: transparent !important;
+        color: rgba(240, 96, 106, 1) !important;
+        border-color: $lightorange !important;
+      }
+    }
+
+    .reviewSubmitButton {
+      width: 20%;
+      float: right;
+      background-color: $lightorange !important;
+      border-color: $lightorange !important;
+      color: white;
+      margin-bottom: 20px !important;
+
+      &:hover,
+      &:active {
+        background-color: $orange !important;
+        color: white !important;
+        border-color: $orange !important;
+      }
+    }
+
+    @media all and (max-width: 479px) {
+      font-size: 0.1em;
+    }
+  }
+
+  .pageDiv {
+    text-align: center;
+  }
+
+  .reviewPaginate {
+    width: 100%;
+    font-size: medium;
+    margin: 10px auto 30px;
+    display: inline-block !important;
+
+    li {
+      margin: 15px;
+      display: inline-block !important;
+    }
+
+    .reviewPage {
+      color: black;
+    }
+
+    .reviewSelectedPage {
+      color: $lightorange !important;
+      font-weight: bold;
+    }
+  }
+}
