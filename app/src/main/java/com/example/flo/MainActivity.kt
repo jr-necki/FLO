@@ -11,45 +11,18 @@ import com.example.flo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-    var isPlay: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
         initNavigation()
 
-        if(intent.hasExtra("isPlay")){
-            isPlay = intent.getBooleanExtra("isPlay",false);
-            if(!isPlay){
-                binding.mainMiniplayerBtn.visibility = View.VISIBLE;
-                binding.mainPauseBtn.visibility = View.GONE;
-            }else{
-                binding.mainMiniplayerBtn.visibility = View.GONE;
-                binding.mainPauseBtn.visibility = View.VISIBLE;
-            }
-        }
-
         //val song = Song(binding.mainMiniPlayerTitleTv.text.toString(),
-       //binding.mainMiniPlayerSingerTv.text.toString())
+        //binding.mainMiniPlayerSingerTv.text.toString())
 
-        val song = Song("라일락","아이유",215,false)
-
-
-        Log.d("Log test",song.singer + song.title)
-
-        binding.mainMiniplayerBtn.setOnClickListener {
-            binding.mainMiniplayerBtn.visibility = View.GONE;
-            binding.mainPauseBtn.visibility = View.VISIBLE;
-            isPlay = true;
-        }
-        binding.mainPauseBtn.setOnClickListener {
-            binding.mainMiniplayerBtn.visibility = View.VISIBLE;
-            binding.mainPauseBtn.visibility = View.GONE;
-            isPlay= false;
-        }
-
+        val song = Song("라일락","아이유",215,true)
+        setMiniPlayer(song)
 
         // 작업할 레이아웃과 바인딩
         binding.mainPlayerLayout.setOnClickListener{
@@ -59,11 +32,20 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("title",song.title)
             intent.putExtra("singer",song.singer)
             intent.putExtra("playTime",song.playTime)
-            intent.putExtra("isPlay",song.isPlaying)
+            intent.putExtra("isPlaying",song.isPlaying)
             startActivity(intent)
         }
 
-
+        binding.mainMiniplayerBtn.setOnClickListener {
+            binding.mainMiniplayerBtn.visibility = View.GONE;
+            binding.mainPauseBtn.visibility = View.VISIBLE;
+            song.isPlaying=true
+        }
+        binding.mainPauseBtn.setOnClickListener {
+            binding.mainMiniplayerBtn.visibility = View.VISIBLE;
+            binding.mainPauseBtn.visibility = View.GONE;
+            song.isPlaying=false
+        }
 
         binding.mainBnv.setOnItemSelectedListener {
             when (it.itemId) {
@@ -99,6 +81,11 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
+    }
+
+    private fun setMiniPlayer(song: Song) {
+        binding.mainMiniPlayerTitleTv.text = song.title
+        binding.mainMiniPlayerSingerTv.text=song.singer
     }
 
     private fun initNavigation() {
