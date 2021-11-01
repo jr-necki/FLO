@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         //val song = Song(binding.mainMiniPlayerTitleTv.text.toString(),
         //binding.mainMiniPlayerSingerTv.text.toString())
 
-        val song = Song("라일락","아이유",215,true)
+        val song = Song("라일락","아이유",215,false)
         setMiniPlayer(song)
 
         // 작업할 레이아웃과 바인딩
@@ -86,6 +86,18 @@ class MainActivity : AppCompatActivity() {
     private fun setMiniPlayer(song: Song) {
         binding.mainMiniPlayerTitleTv.text = song.title
         binding.mainMiniPlayerSingerTv.text=song.singer
+        if(intent.hasExtra("isPlaying")){
+            song.isPlaying = intent.getBooleanExtra("isPlaying",true);
+            if(song.isPlaying){ // 재생중이라면
+                binding.mainPauseBtn.visibility = View.VISIBLE;
+                binding.mainMiniplayerBtn.visibility = View.GONE;
+            }else{ // 재생중이 아니라면
+                binding.mainPauseBtn.visibility = View.GONE;
+                binding.mainMiniplayerBtn.visibility = View.VISIBLE;
+            }
+        }else{
+            Toast.makeText(this,"intent없음",Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun initNavigation() {

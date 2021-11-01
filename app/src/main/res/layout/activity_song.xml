@@ -143,7 +143,7 @@
         android:background="@null"
         android:paddingEnd="0dp"
         android:paddingStart="0dp"
-        android:progressBackgroundTint="@color/light_gray"
+        android:progressBackgroundTint="@color/gray"
         android:progressTint="@color/purple_700"
         android:progress="0"
         android:thumb="@null"

@@ -1,21 +1,24 @@
 package com.example.flo
 
+import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Intent
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.PersistableBundle
+import android.os.*
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.SeekBar
+import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flo.databinding.ActivityMainBinding
 import com.example.flo.databinding.ActivitySongBinding
+import android.widget.Toast.makeText as makeText1
 
 class SongActivity : AppCompatActivity() { // : extends라는 뜻
     lateinit var binding : ActivitySongBinding
-    var isPlay : Boolean=false;
+    var isRepeat : Boolean=false;
     private var song = Song()
     private lateinit var player:Player
     private val handler = Handler(Looper.getMainLooper())
@@ -32,22 +35,64 @@ class SongActivity : AppCompatActivity() { // : extends라는 뜻
         player.start()
         //player.interrupt()
         binding.songArrowDownIb.setOnClickListener{ // mainActivity로 이동
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("title",song.title)
+            intent.putExtra("singer",song.singer)
+            intent.putExtra("playTime",song.playTime)
+            intent.putExtra("isPlaying",song.isPlaying)
+            startActivity(intent)
             finish();
+
         }
+        binding.songStatusV.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                // onProgressChange - Seekbar 값 변경될때마다 호출
+                Log.d(
+                    TAG,
+                    String.format(
+                        "onProgressChanged 값 변경 중 : progress [%d] fromUser [%b]",
+                        progress,
+                        fromUser
+                    )
+                )
+
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+                // onStartTeackingTouch - SeekBar 값 변경위해 첫 눌림에 호출
+                Log.d(
+                    TAG,
+                    String.format("onStartTrackingTouch 값 변경 시작 : progress [%d]", seekBar.progress)
+                )
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                // onStopTrackingTouch - SeekBar 값 변경 끝나고 드래그 떼면 호출
+                Log.d(
+                    TAG,
+                    String.format("onStopTrackingTouch 값 변경 종료: progress [%d]", seekBar.progress)
+                )
+            }
+        })
+
         binding.songPlayIv.setOnClickListener{
             player.isPlaying = true
+            song.isPlaying = true
             setPlayerStatus(true)
         }
 
         binding.songPauseIv.setOnClickListener{
             player.isPlaying = false
+            song.isPlaying = false
             setPlayerStatus(false);
         }
         binding.songRepeatIv.setOnClickListener{
-            setPlayRepeat(false)
+            isRepeat = true
+            setPlayRepeat(true)
         }
         binding.songRepeatLightIv.setOnClickListener{
-            setPlayRepeat(true)
+            isRepeat = false
+            setPlayRepeat(false)
         }
         binding.songRandomIv.setOnClickListener{
             setPlayRandom(false)
@@ -69,7 +114,6 @@ class SongActivity : AppCompatActivity() { // : extends라는 뜻
             binding.songTitleTv.text = song.title
             binding.songSingerTv.text= song.singer
 
-            Toast.makeText(this,song.isPlaying.toString(),Toast.LENGTH_SHORT).show()
             setPlayerStatus(song.isPlaying)
         }
     }
@@ -96,24 +140,34 @@ class SongActivity : AppCompatActivity() { // : extends라는 뜻
 
     private fun setPlayRepeat(isRepeat: Boolean) {
         if(isRepeat){
-            binding.songRepeatIv.visibility=View.VISIBLE;
-            binding.songRepeatLightIv.visibility=View.GONE;
-        }else{
             binding.songRepeatIv.visibility=View.GONE;
             binding.songRepeatLightIv.visibility=View.VISIBLE;
+            makeText1(this,isRepeat.toString(),Toast.LENGTH_SHORT).show()
+        }else{
+            binding.songRepeatIv.visibility=View.VISIBLE;
+            binding.songRepeatLightIv.visibility=View.GONE;
+            makeText1(this,isRepeat.toString(),Toast.LENGTH_SHORT).show()
         }
     }
+
 
     //내부 클래스로 돼서 위에 있는 변수 사용가능
     inner class Player(private val playTime:Int, var isPlaying: Boolean):Thread(){
         private var second = 0;
+        @RequiresApi(Build.VERSION_CODES.N)
         override fun run(){
             while (true) {
                 if(second >= playTime) {
-                    break
+                    if(isRepeat){
+                        binding.songStatusV.progress=0
+                        binding.songStatusV.setProgress(0,true)
+                        second = 0;
+                    }else{
+                        break
+                    }
                 }
                 if(isPlaying){
-                    sleep(1000) //1초마다
+                    sleep(10) //1초마다
                     second++; // 1씩 더해짐
                     // worketthread는 렌더링에 간섭할수 없다..!
                     // 따라서 handler가 필요함
