@@ -7,10 +7,15 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flo.databinding.ActivityMainBinding
+import com.google.gson.Gson
 
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+    //gson
+    private var gson: Gson = Gson()
+    //song
+    private var song: Song = Song()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         //val song = Song(binding.mainMiniPlayerTitleTv.text.toString(),
         //binding.mainMiniPlayerSingerTv.text.toString())
 
-        val song = Song("라일락","아이유",215,false)
+        val song = Song("SICKO MODE","Travis Scott",second=0,313,false,"music_sickmode")
         setMiniPlayer(song)
 
         // 작업할 레이아웃과 바인딩
@@ -31,8 +36,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SongActivity::class.java)
             intent.putExtra("title",song.title)
             intent.putExtra("singer",song.singer)
+            intent.putExtra("second",song.second)
             intent.putExtra("playTime",song.playTime)
             intent.putExtra("isPlaying",song.isPlaying)
+            intent.putExtra("music",song.music)
             startActivity(intent)
         }
 
@@ -86,6 +93,8 @@ class MainActivity : AppCompatActivity() {
     private fun setMiniPlayer(song: Song) {
         binding.mainMiniPlayerTitleTv.text = song.title
         binding.mainMiniPlayerSingerTv.text=song.singer
+        binding.mainProgressSb.progress = (song.second*1000)/song.playTime
+
         if(intent.hasExtra("isPlaying")){
             song.isPlaying = intent.getBooleanExtra("isPlaying",true);
             if(song.isPlaying){ // 재생중이라면
@@ -103,6 +112,20 @@ class MainActivity : AppCompatActivity() {
     private fun initNavigation() {
         supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment())
             .commitAllowingStateLoss()
+
+    }
+
+    override fun onStart(){
+        super.onStart()
+        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE) // 이 앱에서만 SharedPreference에 접근가능
+        val jsonSong = sharedPreferences.getString("song",null)
+        //json을 객체로
+        song = if(jsonSong == null){
+            Song("SICKMODE","Travis Scott",second=0,313,false,"music_sickmode")
+        }else{
+            gson.fromJson(jsonSong,Song::class.java)
+        }
+        setMiniPlayer(song)
 
     }
 

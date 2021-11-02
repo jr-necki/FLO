@@ -90,7 +90,7 @@
             android:id="@+id/song_album_exp2_iv"
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:src="@drawable/img_album_exp2"
+            android:src="@drawable/album_cover_sickmode"
             android:layout_marginTop="15dp"/>
     </androidx.cardview.widget.CardView>
     <ScrollView
@@ -106,10 +106,11 @@
             android:layout_width="110dp"
             android:layout_height="50dp"
             android:textSize="15sp"
-            android:text="나라는 꽃가루에 눈이 따끔해 아야
-눈물이 고여도 꾹 참을래
-내 마음 한켠 비밀스런 오르골에 넣어두고서
-영원히 되감을 순간이니까"
+            android:text="Astro, yeah
+Sun is down, freezin' cold
+That's how we already know winter's here
+My dawg would prolly do it for a Louis belt
+That's just all he know, he don't know nothin' else"
             android:lineSpacingExtra ="5dp"
             android:textAlignment="center"/>
     </ScrollView>
