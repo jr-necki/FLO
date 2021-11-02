@@ -3,7 +3,7 @@ package com.example.flo
 data class Song(
     var title : String ="",
     var singer : String="",
-    var second:Int =0,
+    var second:Int =0, //재생된 시간
     var playTime:Int =0, // 총 재생 시간
     var isPlaying: Boolean = false,
     var music:String = ""

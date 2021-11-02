@@ -48,6 +48,7 @@ class SongActivity : AppCompatActivity() { // : extends라는 뜻
             intent.putExtra("singer",song.singer)
             intent.putExtra("playTime",song.playTime)
             intent.putExtra("isPlaying",song.isPlaying)
+            intent.putExtra("second",song.second)
             startActivity(intent)
             finish();
 
@@ -174,14 +175,14 @@ class SongActivity : AppCompatActivity() { // : extends라는 뜻
         mediaPlayer?.pause() // 미디어 플레이어 중지
         player.isPlaying = false // 스레드 중지
         song.isPlaying = false
-        song.second = (binding.songStatusV.progress*song.playTime)/10000
+        song.second = (binding.songStatusV.progress*song.playTime)/1000
         setPlayerStatus(false) // 정지 상태일 때의 이미지로 전환
 
-        //데이터를 내부저장소에 저장해줌. 간단한 설정값을 저장장
+        //데이터를 내부저장소에 저장해줌. 간단한 설정값을 저장
         val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
         val editor = sharedPreferences.edit() // sharedpreference 조작할 때 사용
         //GSON (객체를 JSON으로 변환해줌)
-        var json = gson.toJson(song)
+        val json = gson.toJson(song)
         editor.putString("song",json)
 
         editor.apply()

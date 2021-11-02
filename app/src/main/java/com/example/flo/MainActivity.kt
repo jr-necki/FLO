@@ -1,6 +1,7 @@
 package com.example.flo
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         //val song = Song(binding.mainMiniPlayerTitleTv.text.toString(),
         //binding.mainMiniPlayerSingerTv.text.toString())
 
-        val song = Song("SICKO MODE","Travis Scott",second=0,313,false,"music_sickmode")
+        val song = Song("SICKO MODE","Travis Scott",0,313,false,"music_sickmode")
         setMiniPlayer(song)
 
         // 작업할 레이아웃과 바인딩
@@ -90,10 +91,17 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun initNavigation() {
+        supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment())
+            .commitAllowingStateLoss()
+
+    }
+
     private fun setMiniPlayer(song: Song) {
         binding.mainMiniPlayerTitleTv.text = song.title
         binding.mainMiniPlayerSingerTv.text=song.singer
-        binding.mainProgressSb.progress = (song.second*1000)/song.playTime
+        binding.mainProgressSb.progress = song.second*1000/song.playTime
+       // mediaPlayer =MediaPlayer.create(this,song.music)
 
         if(intent.hasExtra("isPlaying")){
             song.isPlaying = intent.getBooleanExtra("isPlaying",true);
@@ -104,16 +112,9 @@ class MainActivity : AppCompatActivity() {
                 binding.mainPauseBtn.visibility = View.GONE;
                 binding.mainMiniplayerBtn.visibility = View.VISIBLE;
             }
-        }else{
-            Toast.makeText(this,"intent없음",Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun initNavigation() {
-        supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment())
-            .commitAllowingStateLoss()
-
-    }
 
     override fun onStart(){
         super.onStart()
@@ -121,7 +122,7 @@ class MainActivity : AppCompatActivity() {
         val jsonSong = sharedPreferences.getString("song",null)
         //json을 객체로
         song = if(jsonSong == null){
-            Song("SICKMODE","Travis Scott",second=0,313,false,"music_sickmode")
+            Song("SICKO MODE","Travis Scott",0,313,false,"music_sickmode")
         }else{
             gson.fromJson(jsonSong,Song::class.java)
         }
