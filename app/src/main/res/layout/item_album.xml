@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:text="Butter"
         android:textStyle="bold"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@+id/home_cover_iv"
         app:layout_constraintStart_toStartOf="@id/home_cover_iv"

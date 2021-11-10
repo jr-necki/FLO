@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="20dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
+
+    <ImageView
+        android:id="@+id/locker_cover_iv"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/img_album_exp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/locker_song_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="savage"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textColor="#000000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/locker_cover_iv"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/locker_song_singer_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="에스파 (aespa)"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@+id/locker_song_title_tv"
+        app:layout_constraintStart_toEndOf="@+id/locker_cover_iv"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="5dp"/>
+    <ImageView
+        android:id="@+id/locker_delete_iv"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/btn_player_more"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="15dp"/>
+
+    <ImageView
+        android:id="@+id/locker_play_iv"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/btn_player_play"
+        app:layout_constraintEnd_toStartOf="@+id/locker_delete_iv"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="15dp"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
