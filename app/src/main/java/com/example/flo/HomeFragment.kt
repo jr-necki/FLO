@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.flo.databinding.FragmentHomeBinding
+import com.example.flo.databinding.ItemAlbumBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 
@@ -30,13 +31,25 @@ class HomeFragment : Fragment() {
 //                .replace(R.id.main_frm, AlbumFragment())
 //                .commitAllowingStateLoss()
 //        }
+        //앨범 별 수록곡
+        var butter=ArrayList<Song>()
+        butter.add(Song("Butter","bts",164,0,false))
+        butter.add(Song("IDOL","bts",164,0,false))
+        butter.add(Song("Dynamite","bts",164,0,false))
+        var lilac=ArrayList<Song>()
+        butter.add(Song("Lilac","아이유",164,0,false))
+        butter.add(Song("좋은날","아이유",164,0,false))
+        var astroworld=ArrayList<Song>()
+        butter.add(Song("Sickomode","Travis scott",164,0,false))
+        butter.add(Song("Goosebumps","Travis scott",164,0,false))
+
         // 데이터 리스트 생성 더미 데이터
         albumDatas.apply {
-            add(Album("Butter","방탄소년단 (BTS)",R.drawable.img_album_exp))
-            add(Album("Lilac","아이유 (IU)",R.drawable.img_album_exp2))
-            add(Album("Savage","에스파 (AESPA)",R.drawable.img_album_exp))
-            add(Album("SICKO MODE","Travis Scott",R.drawable.img_album_exp))
-            add(Album("Butter","방탄소년단 (BTS)",R.drawable.img_album_exp))
+            add(Album("Butter","방탄소년단 (BTS)",R.drawable.img_album_exp,butter))
+            add(Album("Lilac","아이유 (IU)",R.drawable.img_album_exp2,lilac))
+            add(Album("SICKO MODE","Travis Scott",R.drawable.album_cover_sickmode,astroworld))
+            add(Album("Savage","에스파 (AESPA)",R.drawable.album_cover_savage,butter))
+
         }
 
 
@@ -55,6 +68,10 @@ class HomeFragment : Fragment() {
 
             override fun onRemoveAlbum(position: Int) {
               albumRVAdapter.removeItem(position)
+            }
+
+            override fun onPlayBtnClick(binding: ItemAlbumBinding) {
+                
             }
         })
         // 레이아웃 매니저 설정
@@ -78,6 +95,7 @@ class HomeFragment : Fragment() {
         }.attach()
         return binding.root
     }
+
 
     private fun changeAlbumFragment(album: Album) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
