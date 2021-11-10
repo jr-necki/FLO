@@ -25,7 +25,8 @@ class AlbumRVAdapter(private val albumlist : ArrayList<Album>) // data binding
 
     // 뷰홀더를 생성해줘야할 때 호출되는 함수 => 아이템 뷰 객체를 만들어서 뷰 홀더에 던져줌
     // 몇 번 호출되고 끝
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): AlbumRVAdapter.ViewHolder {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int):
+            AlbumRVAdapter.ViewHolder {
         val binding: ItemAlbumBinding = ItemAlbumBinding.inflate(LayoutInflater
             .from(viewGroup.context),viewGroup,false);
 
