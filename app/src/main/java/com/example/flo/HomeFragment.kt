@@ -1,5 +1,6 @@
 package com.example.flo
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.flo.databinding.FragmentHomeBinding
-import com.example.flo.databinding.ItemAlbumBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 
@@ -33,15 +33,15 @@ class HomeFragment : Fragment() {
 //        }
         //앨범 별 수록곡
         var butter=ArrayList<Song>()
-        butter.add(Song("Butter","bts",164,0,false))
-        butter.add(Song("IDOL","bts",164,0,false))
+        butter.add(Song("Butter","bts",164,0,false,"music_butter"))
+        butter.add(Song("IDOL","bts",164,0,false,"music_sickmode"))
         butter.add(Song("Dynamite","bts",164,0,false))
         var lilac=ArrayList<Song>()
-        butter.add(Song("Lilac","아이유",164,0,false))
-        butter.add(Song("좋은날","아이유",164,0,false))
+        lilac.add(Song("Lilac","아이유",164,0,false,"music_sickmode"))
+        lilac.add(Song("좋은날","아이유",164,0,false,"music_butter"))
         var astroworld=ArrayList<Song>()
-        butter.add(Song("Sickomode","Travis scott",164,0,false))
-        butter.add(Song("Goosebumps","Travis scott",164,0,false))
+        astroworld.add(Song("Sickomode","Travis scott",164,0,false,"music_butter"))
+        astroworld.add(Song("Goosebumps","Travis scott",164,0,false,"music_butter"))
 
         // 데이터 리스트 생성 더미 데이터
         albumDatas.apply {
@@ -51,7 +51,6 @@ class HomeFragment : Fragment() {
             add(Album("Savage","에스파 (AESPA)",R.drawable.album_cover_savage,butter))
 
         }
-
 
 
         // 더미데이터랑 Adapter 연결
@@ -70,8 +69,10 @@ class HomeFragment : Fragment() {
               albumRVAdapter.removeItem(position)
             }
 
-            override fun onPlayBtnClick(binding: ItemAlbumBinding) {
-                
+            override fun onPlayBtnClick(album: Album) {
+               var song = album.songs?.get(0)
+                (activity as MainActivity).binding.mainMiniPlayerTitleTv.text = song?.title
+                (activity as MainActivity).binding.mainMiniPlayerSingerTv.text = song?.singer
             }
         })
         // 레이아웃 매니저 설정
@@ -111,4 +112,6 @@ class HomeFragment : Fragment() {
     }
 
 
+
 }
+

@@ -13,7 +13,7 @@ class AlbumRVAdapter(private val albumlist : ArrayList<Album>) // data binding
     interface MyItemClickListener{
         fun onItemClick(album: Album)
         fun onRemoveAlbum(position: Int)
-        fun onPlayBtnClick(binding: ItemAlbumBinding)
+        fun onPlayBtnClick(album: Album)
     }
     //객체를 저장하는 변수
     private lateinit var mItemClickListener: MyItemClickListener
@@ -52,7 +52,8 @@ class AlbumRVAdapter(private val albumlist : ArrayList<Album>) // data binding
     // 뷰 홀더에 데이터를 바인딩 할 때마다 호출 => 많이 호출
     override fun onBindViewHolder(holder: AlbumRVAdapter.ViewHolder, position: Int) {
         holder.bind(albumlist[position])
-         holder.itemView.setOnClickListener { mItemClickListener.onItemClick(albumlist[position]) }
+        holder.itemView.setOnClickListener { mItemClickListener.onItemClick(albumlist[position]) }
+        holder.binding.homeCoverPlayIv.setOnClickListener { mItemClickListener.onPlayBtnClick(albumlist[position]) }
 //        holder.binding.homeCoverSong2.setOnClickListener {
 //            mItemClickListener.onRemoveAlbum(position)
 //        }

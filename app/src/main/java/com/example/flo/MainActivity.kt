@@ -1,11 +1,8 @@
 package com.example.flo
 
 import android.content.Intent
-import android.media.MediaPlayer
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flo.databinding.ActivityMainBinding
 import com.google.gson.Gson
@@ -97,21 +94,25 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun setMiniPlayer(song: Song) {
-        binding.mainMiniPlayerTitleTv.text = song.title
-        binding.mainMiniPlayerSingerTv.text=song.singer
-        binding.mainProgressSb.progress = song.second*1000/song.playTime
-       // mediaPlayer =MediaPlayer.create(this,song.music)
+    fun setMiniPlayer(song: Song?) {
+        if(song != null){
+            binding.mainMiniPlayerTitleTv.text = song.title
+            binding.mainMiniPlayerSingerTv.text=song.singer
+            binding.mainProgressSb.progress = song.second*1000/song.playTime
+            // mediaPlayer =MediaPlayer.create(this,song.music)
 
-        if(intent.hasExtra("isPlaying")){
-            song.isPlaying = intent.getBooleanExtra("isPlaying",true);
-            if(song.isPlaying){ // 재생중이라면
-                binding.mainPauseBtn.visibility = View.VISIBLE;
-                binding.mainMiniplayerBtn.visibility = View.GONE;
-            }else{ // 재생중이 아니라면
-                binding.mainPauseBtn.visibility = View.GONE;
-                binding.mainMiniplayerBtn.visibility = View.VISIBLE;
+            if(intent.hasExtra("isPlaying")){
+                song.isPlaying = intent.getBooleanExtra("isPlaying",true);
+                if(song.isPlaying){ // 재생중이라면
+                    binding.mainPauseBtn.visibility = View.VISIBLE;
+                    binding.mainMiniplayerBtn.visibility = View.GONE;
+                }else{ // 재생중이 아니라면
+                    binding.mainPauseBtn.visibility = View.GONE;
+                    binding.mainMiniplayerBtn.visibility = View.VISIBLE;
+                }
             }
+        }else{
+            //
         }
     }
 
