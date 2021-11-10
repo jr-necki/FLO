@@ -5,10 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.flo.databinding.FragmentBannerBinding
-import com.example.flo.databinding.FragmentDetailBinding
 import com.example.flo.databinding.FragmentLockersongBinding
-import com.example.flo.databinding.FragmentSongBinding
 
 class LockersongFragment : Fragment() {
     lateinit var binding: FragmentLockersongBinding
@@ -40,10 +37,20 @@ class LockersongFragment : Fragment() {
             add(LockerSong("Butter","방탄소년단 (BTS)",R.drawable.img_album_exp))
         }
         // 더미 데이터와 Adapter 연결
-        val lockersongRVAdapter = LockerSongAdapter(songDatas)
+        val lockersongRVAdapter = LockerSongRVAdapter(songDatas)
 
         // 리사이클러뷰에 어댑터를 연결
         binding.lockerSongRv.adapter = lockersongRVAdapter
+
+        lockersongRVAdapter.setMyItemClickListener(object : LockerSongRVAdapter.MyItemClickListener{
+            override fun onItemClick(song: LockerSong) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onRemoveSong(position: Int) {
+                lockersongRVAdapter.removerItem(position)
+            }
+        })
 
         return binding.root
     }
