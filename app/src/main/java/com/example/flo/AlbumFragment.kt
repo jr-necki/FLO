@@ -4,86 +4,64 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.flo.databinding.FragmentAlbumBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 
-class AlbumFragment : Fragment(){
+class AlbumFragment : Fragment() {
+
     lateinit var binding: FragmentAlbumBinding
-    private var gson : Gson =  Gson()
-    val infomation = arrayListOf("수록곡","상세정보","영상")
+    private var gson: Gson = Gson()
+
+    val information = arrayListOf("수록곡", "상세정보", "영상")
+
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
-        //fragment에서 binding 초기화
-        binding = FragmentAlbumBinding.inflate(inflater, container,false)
+        binding = FragmentAlbumBinding.inflate(inflater, container, false)
 
-        //Home 에서 넘어온 데이터 받아오기
         val albumData = arguments?.getString("album")
-        val album = gson.fromJson(albumData,Album::class.java)
+        val album = gson.fromJson(albumData, Album::class.java)
 
-        // Home에서 넘어온 데이터를 반영
-        setInit(album)
+        setViews(album)
+        //ROOM_DB
+        val songs = getSongs(album.id) //앨범안에 있는 수록곡들을 불러옵니다.
+        // 이 다음에 수록곡 프래그먼트에 songs을 전달해주는 식으로 사용하시면 됩니다.
 
-
-        binding.albumArrowBackIb.setOnClickListener{
+        //set click listener
+        binding.albumBackIv.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
-                // mainActivity의 frame --> 바꿀 프레그먼트
-                .replace(R.id.main_frm, HomeFragment())
-                .commitAllowingStateLoss()
+                    .replace(R.id.main_frm, HomeFragment())
+                    .commitAllowingStateLoss()
         }
-//        binding.albumToggleIv.setOnClickListener {
-//            setMix(false)
-//        }
-//        binding.albumToggleOnIv.setOnClickListener {
-//            setMix(true)
-//        }
-//        binding.albumListSong01Layout.setOnClickListener {
-//        val text : String =binding.albumSongTitle01.text.toString()+"-"+binding.albumSongSinger01.text.toString();
-//            Toast.makeText(activity,"🎶 "+text,Toast.LENGTH_SHORT).show()
-//        }
-//        binding.albumListSong02Layout.setOnClickListener {
-//            val text : String =binding.albumSongTitle02.text.toString()+"-"+binding.albumSongSinger02.text.toString();
-//            Toast.makeText(activity,"🎶 "+text,Toast.LENGTH_SHORT).show()
-//        }
-//        binding.albumListSong03Layout.setOnClickListener {
-//            val text : String =binding.albumSongTitle03.text.toString()+"-"+binding.albumSongSinger03.text.toString();
-//            Toast.makeText(activity,"🎶 "+text,Toast.LENGTH_SHORT).show()
-//        }
-//        binding.albumListSong04Layout.setOnClickListener {
-//            val text : String =binding.albumSongTitle04.text.toString()+"-"+binding.albumSongSinger04.text.toString();
-//            Toast.makeText(activity,"🎶 "+text,Toast.LENGTH_SHORT).show()
-//        }
-        //activity에서 setContentView와 같음음
 
-        val albumAdapter = AlbumViewPagerAdapter(this)
+        //init viewpager
+        val albumAdapter = AlbumVPAdapter(this)
+
         binding.albumContentVp.adapter = albumAdapter
-        TabLayoutMediator(binding.albumContentTb,binding.albumContentVp){
-                tab, position ->
-            tab.text = infomation[position]
+        TabLayoutMediator(binding.albumContentTb, binding.albumContentVp){
+            tab, position ->
+            tab.text = information[position]
         }.attach()
-       return binding.root
+
+        return binding.root
     }
 
-    private fun setInit(album: Album) {
-        binding.albumAlbumCoverIv.setImageResource(album.coverImg!!)
-        binding.albumNameTv.text = album.title.toString()
-        binding.albumSingerTv.text = album.singer.toString()
+    private fun setViews(album: Album) {
+        binding.albumMusicTitleTv.text = album.title.toString()
+        binding.albumSingerNameTv.text = album.singer.toString()
+        binding.albumAlbumIv.setImageResource(album.coverImg!!)
     }
 
-    private fun setMix(b: Boolean) {
-//        if(b){
-//            binding.albumToggleIv.visibility=View.VISIBLE;
-//            binding.albumToggleOnIv.visibility=View.GONE;
-//        }else{
-//            binding.albumToggleIv.visibility=View.GONE;
-//            binding.albumToggleOnIv.visibility=View.VISIBLE;
-//        }
+    //ROOM_DB
+    private fun getSongs(albumIdx: Int): ArrayList<Song>{
+        val songDB = SongDatabase.getInstance(requireContext())!!
 
+        val songs = songDB.songDao().getSongsInAlbum(albumIdx) as ArrayList
+
+        return songs
     }
-
 }

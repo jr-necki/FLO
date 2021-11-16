@@ -1,6 +1,5 @@
 package com.example.flo
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,109 +8,64 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.flo.databinding.FragmentHomeBinding
-import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
-    val infomation = arrayListOf("","","")
-    private var albumDatas=ArrayList<Album>();
+    private var albums = ArrayList<Album>()
+
+    private lateinit var songDB: SongDatabase
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-//        binding.homeCover1.setOnClickListener{
-//            (context as MainActivity).supportFragmentManager.beginTransaction()
-//                    // mainActivity의 frame --> 바꿀 프레그먼트
-//                .replace(R.id.main_frm, AlbumFragment())
-//                .commitAllowingStateLoss()
-//        }
-        //앨범 별 수록곡
-        var butter=ArrayList<Song>()
-        butter.add(Song("Butter","bts",164,0,false,"music_butter"))
-        butter.add(Song("IDOL","bts",164,0,false,"music_sickmode"))
-        butter.add(Song("Dynamite","bts",164,0,false))
-        var lilac=ArrayList<Song>()
-        lilac.add(Song("Lilac","아이유",164,0,false,"music_sickmode"))
-        lilac.add(Song("좋은날","아이유",164,0,false,"music_butter"))
-        var astroworld=ArrayList<Song>()
-        astroworld.add(Song("Sickomode","Travis scott",164,0,false,"music_butter"))
-        astroworld.add(Song("Goosebumps","Travis scott",164,0,false,"music_butter"))
+        //ROOM_DB
+        songDB = SongDatabase.getInstance(requireContext())!!
+        albums.addAll(songDB.albumDao().getAlbums()) // songDB에서 album list를 가져옵니다.
 
-        // 데이터 리스트 생성 더미 데이터
-        albumDatas.apply {
-            add(Album("Butter","방탄소년단 (BTS)",R.drawable.img_album_exp,butter))
-            add(Album("Lilac","아이유 (IU)",R.drawable.img_album_exp2,lilac))
-            add(Album("SICKO MODE","Travis Scott",R.drawable.album_cover_sickmode,astroworld))
-            add(Album("Savage","에스파 (AESPA)",R.drawable.album_cover_savage,butter))
+        //레이아웃 매니저 설정
+        binding.homeTodayMusicAlbumRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-        }
+        //더미데이터와 Adapter 연결
+        val albumRecyclerViewAdapter = AlbumRVAdapter(albums)
 
-
-        // 더미데이터랑 Adapter 연결
-        val albumRVAdapter = AlbumRVAdapter(albumDatas)
-
-        // 리사이클러뷰에 어댑터를 연결
-        binding.homeTodaySongRecycle.adapter = albumRVAdapter
-
-        albumRVAdapter.setMyItemClickListener(object : AlbumRVAdapter.MyItemClickListener{
-
-            override fun onItemClick(album : Album){
-                changeAlbumFragment(album)
+        //리스너 객체 생성 및 전달
+        albumRecyclerViewAdapter.setMyItemClickListener(object : AlbumRVAdapter.MyItemClickListener{
+            override fun onItemClick(album: Album) {
+                startAlbumFragment(album)
             }
 
             override fun onRemoveAlbum(position: Int) {
-              albumRVAdapter.removeItem(position)
-            }
-
-            override fun onPlayBtnClick(album: Album) {
-               var song = album.songs?.get(0)
-                (activity as MainActivity).binding.mainMiniPlayerTitleTv.text = song?.title
-                (activity as MainActivity).binding.mainMiniPlayerSingerTv.text = song?.singer
+                albumRecyclerViewAdapter.removeItem(position)
             }
         })
-        // 레이아웃 매니저 설정
-        binding.homeTodaySongRecycle.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
 
+        binding.homeTodayMusicAlbumRv.adapter = albumRecyclerViewAdapter
 
-
-        val bannerAdapter = BannerViewPagerAdapter(this)
+        val bannerAdapter = HomeViewpagerAdapter(this)
         bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp))
         bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp2))
-        bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp))
 
         binding.homeBannerVp.adapter = bannerAdapter
         binding.homeBannerVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
-        val homeAdapter = HomeViewPagerAdapter(this)
-        binding.homeContentVp.adapter = homeAdapter
-        TabLayoutMediator(binding.homeTb, binding.homeContentVp){
-            tab,position ->
-            tab.text = infomation[position]
-        }.attach()
         return binding.root
     }
 
-
-    private fun changeAlbumFragment(album: Album) {
+    fun startAlbumFragment(album: Album) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
-            // mainActivity의 frame --> 바꿀 프레그먼트
-            .replace(R.id.main_frm, AlbumFragment().apply {
-                arguments = Bundle().apply {
-                    val gson = Gson()
-                    val albumJson = gson.toJson(album)
-                    putString("album", albumJson)
-                }
-            })
-            .commitAllowingStateLoss()
+                .replace(R.id.main_frm, AlbumFragment().apply {
+                    arguments = Bundle().apply {
+                        val gson = Gson()
+                        val albumJson = gson.toJson(album)
+                        putString("album", albumJson)
+                    }
+                })
+                .commitAllowingStateLoss()
     }
-
-
-
 }
-

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="song_singer_more_iv" type="id" />
+    <item name="song_album_iv" type="id" />
+    <item name="album_tabLayout_tl" type="id" />
+</resources>

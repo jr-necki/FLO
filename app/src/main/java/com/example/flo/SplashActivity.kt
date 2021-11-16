@@ -1,26 +1,22 @@
 package com.example.flo
 
 import android.content.Intent
+import android.graphics.Color
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.appcompat.app.AppCompatActivity
-import com.example.flo.databinding.ActivitySplashBinding
+import android.view.View
+import android.view.WindowManager
 
-class SplashActivity: AppCompatActivity() {
-    lateinit var binding: ActivitySplashBinding // xml파일과 연결
-
+class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivitySplashBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        // worker thread가 viewLandering을 하기위해
-        // Looper: 전달해주는 역할
+        setContentView(R.layout.activity_splash)
         Handler(Looper.getMainLooper()).postDelayed({
-           // go to mainActivity
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        },2000) //2초
+            startActivity(Intent(this,MainActivity::class.java))
+            finish()
+        }, 3000)
+
     }
 }

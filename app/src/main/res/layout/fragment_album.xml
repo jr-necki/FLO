@@ -1,114 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
+
+
     <ImageView
-        android:id="@+id/album_arrow_back_ib"
-        android:src="@drawable/btn_arrow_black"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="10dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        android:id="@+id/album_like_iv"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="15dp"
+        android:src="@drawable/ic_my_like_off"
+        app:layout_constraintBottom_toBottomOf="@+id/album_more_iv"
+        app:layout_constraintEnd_toStartOf="@+id/album_more_iv"
+        app:layout_constraintTop_toTopOf="@+id/album_more_iv" />
+
     <ImageView
         android:id="@+id/album_more_iv"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/white"
+        android:scaleType="fitXY"
         android:src="@drawable/btn_player_more"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"/>
-    <ImageView
-        android:id="@+id/album_like_off_ib"
-        android:src="@drawable/ic_my_like_off"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/album_more_iv"/>
-    <TextView
-        android:id="@+id/album_name_tv"
-        android:text="BTS  ALBUM"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@+id/album_like_off_ib"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"/>
-    <TextView
-        android:id="@+id/album_singer_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="방탄소년단"
-        app:layout_constraintTop_toBottomOf="@+id/album_name_tv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <TextView
-        android:id="@+id/album_info_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2021.03.25 | 정규 | 댄스 팝"
-        app:layout_constraintTop_toBottomOf="@+id/album_singer_tv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:layout_constraintTop_toBottomOf="@+id/album_info_tv"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    >
-
-</LinearLayout>
-    <androidx.cardview.widget.CardView
-        android:layout_marginTop="10dp"
-        android:id="@+id/image_layout"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        app:cardCornerRadius="4dp"
-        app:layout_constraintTop_toBottomOf="@+id/album_info_tv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:contentPadding="0dp"
-        app:cardBackgroundColor="#fff"
-        app:strokeColor="#ffff"
-        >
-       <ImageView
-           android:id="@+id/album_albumCover_iv"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:scaleType="fitEnd"
-           android:src="@drawable/img_album_exp"/>
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/album_lp_iv"
-        android:layout_width="50dp"
-        android:layout_height="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:layout_marginStart="155dp"
         android:src="@drawable/img_album_lp"
-        app:layout_constraintStart_toEndOf="@id/image_layout"
-        app:layout_constraintTop_toTopOf="@+id/image_layout" />
+        app:layout_constraintBottom_toBottomOf="@+id/album_album_iv"
+        app:layout_constraintStart_toStartOf="@+id/album_album_iv"
+        app:layout_constraintTop_toTopOf="@+id/album_album_iv" />
+
+    <ImageView
+        android:id="@+id/album_back_iv"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/white"
+        android:scaleType="fitXY"
+        android:src="@drawable/btn_arrow_black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/album_music_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="IU 5th Album 'LILAC'"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/album_back_iv" />
+
+
+    <TextView
+        android:id="@+id/album_singer_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="가수"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/album_music_title_tv"
+        app:layout_constraintStart_toStartOf="@+id/album_music_title_tv"
+        app:layout_constraintTop_toBottomOf="@+id/album_music_title_tv" />
+
+    <TextView
+        android:id="@+id/album_music_title_info_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="2021.03.25 | 정규 | 댄스 팝"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/album_singer_name_tv"
+        app:layout_constraintStart_toStartOf="@+id/album_singer_name_tv"
+        app:layout_constraintTop_toBottomOf="@+id/album_singer_name_tv" />
+
+    <ImageView
+        android:id="@+id/album_album_iv"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/img_album_exp2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/album_music_title_info_tv" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/widget_black_play"
+        app:layout_constraintBottom_toBottomOf="@+id/album_album_iv"
+        app:layout_constraintEnd_toEndOf="@+id/album_album_iv" />
 
     <com.google.android.material.tabs.TabLayout
-        android:layout_marginTop="15dp"
         android:id="@+id/album_content_tb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:tabSelectedTextColor="#3f3fff"
         app:tabIndicatorFullWidth="false"
         app:tabIndicatorColor="#3f3fff"
-        app:tabTextColor="#3f3fff"
         app:tabRippleColor="#00ff0000"
-        app:layout_constraintTop_toBottomOf="@+id/image_layout"
+        app:layout_constraintTop_toBottomOf="@id/album_album_iv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <View
+        android:id="@+id/album_line_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#dcdcdc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/album_content_tb" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/album_content_vp"
@@ -120,102 +139,56 @@
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 
-<!--    <TextView-->
-<!--        android:layout_marginTop="15dp"-->
-<!--        android:textStyle="bold"-->
-<!--        android:id="@+id/album_songs_tv"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="수록곡"-->
-<!--        android:textColor="@color/purple_500"-->
-<!--        android:textSize="15sp"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/image_layout"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.1"/>-->
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/linearLayout4"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="30dp"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        app:layout_constraintEnd_toEndOf="@+id/album_album_iv"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/album_album_iv"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/album_album_iv">-->
 
-<!--    <TextView-->
-<!--        android:layout_marginTop="15dp"-->
-<!--        android:textStyle="bold"-->
-<!--        android:id="@+id/album_detailInfo_tv"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="상세정보"-->
-<!--        android:textSize="15sp"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/image_layout"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"/>-->
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="수록곡"-->
+    <!--            android:textColor="@color/select_color"-->
+    <!--            android:textStyle="bold" />-->
 
-<!--    <TextView-->
-<!--        android:layout_marginTop="15dp"-->
-<!--        android:textStyle="bold"-->
-<!--        android:id="@+id/album_video_tv"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="영상"-->
-<!--        android:textSize="15sp"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/image_layout"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.9"/>-->
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginStart="100dp"-->
+    <!--            android:text="상세정보"-->
+    <!--            android:textColor="@color/black" />-->
 
-<!--    <View-->
-<!--        android:id="@+id/song_selectedline_v"-->
-<!--        android:layout_width="40dp"-->
-<!--        android:layout_height="2dp"-->
-<!--        android:background="@color/purple_500"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/album_songs_tv"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:layout_marginTop="15dp"-->
-<!--        app:layout_constraintHorizontal_bias="0.1"/>-->
-<!--    <View-->
-<!--        android:id="@+id/song_line_v"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0.5dp"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/song_selectedline_v"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.1"-->
-<!--        android:background="@color/gray"-->
-<!--        app:layout_goneMarginTop="0dp"/>-->
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginStart="100dp"-->
+    <!--            android:text="영상"-->
+    <!--            android:textColor="@color/black" />-->
 
-<!--    <ImageView-->
-<!--        android:id="@+id/album_total_check_iv"-->
-<!--        android:src="@drawable/btn_playlist_select_off"-->
-<!--        android:layout_width="25dp"-->
-<!--        android:layout_height="25dp"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/album_mix_cv"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        android:layout_marginStart="10dp"/>-->
-<!--    <TextView-->
-<!--        android:id="@+id/album_total_check_tv"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="25dp"-->
-<!--        android:text="전체선택"-->
-<!--        android:gravity="center"-->
-<!--        android:textSize="15sp"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/album_mix_cv"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/album_total_check_iv"/>-->
+    <!--    </LinearLayout>-->
 
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="25dp"-->
-<!--        android:gravity="center"-->
-<!--        android:text="전체듣기"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/album_mix_cv"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:layout_marginEnd="10dp"-->
-<!--        android:id="@+id/album_total_play_tv"/>-->
-<!--    <ImageView-->
-<!--        android:layout_width="25dp"-->
-<!--        android:layout_height="25dp"-->
-<!--        android:src="@drawable/icon_browse_arrow_right"-->
-<!--        android:id="@+id/album_browse_arrow_iv"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/album_mix_cv"-->
-<!--        app:layout_constraintEnd_toStartOf="@+id/album_total_play_tv" />-->
-<!--&lt;!&ndash;==============================================================곡 리스트============================================================&ndash;&gt;-->
+    <!--3주차 탭레이아웃-->
 
+    <!--    <com.google.android.material.tabs.TabLayout-->
+    <!--        android:id="@+id/album_tabLayout_tl"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:tabMaxWidth="0dp"-->
+    <!--        app:tabGravity="fill"-->
+    <!--        app:tabMode="fixed"-->
+    <!--        app:tabIndicatorFullWidth="false"-->
+    <!--        app:tabRippleColor="@android:color/transparent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/album_album_iv"-->
+    <!--        app:tabIndicatorColor="@color/select_color"-->
+    <!--        app:tabIndicatorGravity="bottom"-->
+    <!--        app:tabSelectedTextColor="@color/select_color" />-->
 
 
 
