@@ -20,10 +20,10 @@ interface SongDao {
     @Query("SELECT * FROM SongTable WHERE id = :id")
     fun getSong(id: Int): Song
 
-    @Query("UPDATE SongTable SET isLike= :isLike WHERE id = :id")
+    @Query("UPDATE SongTable SET isLike= :isLike WHERE id = :id") // 특정 id인 것만 like업뎃
     fun updateIsLikeById(isLike :Boolean,id: Int)
 
-    @Query("SELECT * FROM SongTable WHERE isLike = :isLike")
+    @Query("SELECT * FROM SongTable WHERE isLike = :isLike") // like 된 것만
     fun getLikedSongs(isLike: Boolean): List<Song>
 
     @Query("SELECT * FROM SongTable WHERE albumIdx = :albumIdx")

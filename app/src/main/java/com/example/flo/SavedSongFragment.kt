@@ -45,7 +45,7 @@ class SavedSongFragment : Fragment() {
 
         binding.lockerSavedSongRecyclerView.adapter = songRVAdapter
 
-        songRVAdapter.addSongs(songDB.songDao().getLikedSongs(true) as ArrayList)
+        songRVAdapter.addSongs(songDB.songDao().getLikedSongs(true) as ArrayList) // arrayList로 형변환
 
     }
 }

@@ -27,6 +27,7 @@ class SongActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySongBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        // sharedpreference song id와 nowPos 찾아서 비교
 
         initPlayList()
         initSong()
@@ -58,8 +59,8 @@ class SongActivity : AppCompatActivity() {
     }
 
     private fun initPlayList(){
-        songDB = SongDatabase.getInstance(this)!!
-        songs.addAll(songDB.songDao().getSongs())
+        songDB = SongDatabase.getInstance(this)!! // 초기화
+        songs.addAll(songDB.songDao().getSongs()) // 디비에 있는 것을 가져와줌
     }
 
 
@@ -72,7 +73,7 @@ class SongActivity : AppCompatActivity() {
         val spf = getSharedPreferences("song", MODE_PRIVATE)
         val songId = spf.getInt("songId", 0)
 
-        nowPos = getPlayingSongPosition(songId)
+        nowPos = getPlayingSongPosition(songId) // song id가 몇번째인지 찾기
 
         Log.d("now Song ID",songs[nowPos].id.toString())
 
@@ -81,9 +82,9 @@ class SongActivity : AppCompatActivity() {
     }
 
     private fun getPlayingSongPosition(songId: Int): Int{
-        for (i in 0 until songs.size){
+        for (i in 0 until songs.size){ // 반복문
             if (songs[i].id == songId){
-                return i
+                return i // 이게 nowPos
             }
         }
         return 0
@@ -151,7 +152,7 @@ class SongActivity : AppCompatActivity() {
 
         nowPos += direct
 
-        timer.interrupt()
+        timer.interrupt() // 타이머 멈춤
         startTimer()
 
         mediaPlayer?.release() // 미디어플레이어가 가지고 있던 리소스를 해방
@@ -160,7 +161,7 @@ class SongActivity : AppCompatActivity() {
         setPlayer(songs[nowPos])
     }
     private fun setLike(isLike: Boolean){
-        songs[nowPos].isLike = !isLike
+        songs[nowPos].isLike = !isLike // 반대값 넣어줌
         songDB.songDao().updateIsLikeById(!isLike,songs[nowPos].id)
 
         if (isLike){

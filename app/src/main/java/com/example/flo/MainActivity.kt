@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
 
         val spf = getSharedPreferences("song", MODE_PRIVATE)
-        val songId = spf.getInt("songId", 0)
+        val songId = spf.getInt("songId", 0) //sharedPreference
 
         val songDB = SongDatabase.getInstance(this)!!
         song = if (songId == 0) {
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         setMiniPlayer(song)
     }
 
-    private fun initNavigation() {
+    private fun initNavigation() { // bottom navigation
         supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment())
             .commitAllowingStateLoss()
 
@@ -119,10 +119,10 @@ class MainActivity : AppCompatActivity() {
 
     //ROOM_DB
     private fun inputDummyAlbums() {
-        val songDB = SongDatabase.getInstance(this)!!
-        val albums = songDB.albumDao().getAlbums()
+        val songDB = SongDatabase.getInstance(this)!! // this 액티비티로부터 instance 얻어옴
+        val albums = songDB.albumDao().getAlbums() // 모든 데이터 담음
 
-        if (albums.isNotEmpty()) return
+        if (albums.isNotEmpty()) return // 이미 더미데이터를 넣었다면 넘어가기
 
         songDB.albumDao().insert(
             Album(
@@ -158,6 +158,7 @@ class MainActivity : AppCompatActivity() {
                 "GREAT!", "모모랜드 (MOMOLAND)", R.drawable.img_album_exp5
             )
         )
+
 
     }
 
