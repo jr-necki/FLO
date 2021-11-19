@@ -1,12 +1,13 @@
 package com.example.flo
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.room.PrimaryKey
 import com.example.flo.databinding.ActivityMainBinding
 import com.google.gson.Gson
 
@@ -18,6 +19,11 @@ class MainActivity : AppCompatActivity() {
 
     // 미디어 플레이어
     private var mediaPlayer: MediaPlayer? = null
+    lateinit var timer: MainActivity.Timer
+
+    private var songs = ArrayList<Song>()
+    private var nowPos = 0
+    private lateinit var songDB: SongDatabase
 
     // Gson
     private val gson: Gson = Gson()
@@ -26,20 +32,90 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        songDB =  SongDatabase.getInstance(this)!! // 초기화
+        songs.addAll(songDB.songDao().getSongs())
 
         initNavigation()
         inputDummyAlbums()
         inputDummySongs()
+        initClickListener()
 
         binding.mainPlayerLayout.setOnClickListener {
             Log.d("nowSongId", song.id.toString())
+            Log.d("nowSongTitle",song.title)
+
             val editor = getSharedPreferences("song", MODE_PRIVATE).edit()
-            editor.putInt("songId", song.id)
+            editor.putInt("songId", songs[nowPos].id)
             editor.apply()
 
             val intent = Intent(this@MainActivity, SongActivity::class.java)
 
             startActivity(intent)
+        }
+    }
+
+    private fun initClickListener() {
+        binding.mainMiniplayerPlayIv.setOnClickListener {
+            // 노래 재생
+            setPlayerStatus(true)
+        }
+
+        binding.mainMiniplayerPauseIv.setOnClickListener {
+            // 노래 정지
+            setPlayerStatus(false)
+        }
+
+        binding.mainMiniplayerPreviousIv.setOnClickListener {
+            // 이전 곡
+            moveSong(-1)
+        }
+
+        binding.mainMiniplayerNextIv.setOnClickListener {
+            // 다음 곡
+            moveSong(+1)
+        }
+
+
+    }
+
+    private fun moveSong(direct: Int) {
+        if (nowPos + direct < 0){
+            Toast.makeText(this,"first song",Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (nowPos + direct >= songs.size){
+            Toast.makeText(this,"last song",Toast.LENGTH_SHORT).show()
+            return
+        }
+        nowPos+=direct
+        timer.interrupt()
+        startTimer(songs[nowPos])
+
+        mediaPlayer?.release()
+        mediaPlayer = null
+        setMiniPlayer(songs[nowPos])
+
+    }
+
+    private fun startTimer(nowPos: Song) {
+        timer = Timer(song.playTime, song.isPlaying)
+        timer.start()
+    }
+
+    private fun setPlayerStatus(isPlaying: Boolean) {
+        timer.isPlaying = isPlaying
+        songs[nowPos].isPlaying = isPlaying
+
+        if(isPlaying){
+            binding.mainMiniplayerPlayIv.visibility = View.GONE
+            binding.mainMiniplayerPauseIv.visibility = View.VISIBLE
+
+            mediaPlayer?.start()
+        }else{
+            binding.mainMiniplayerPlayIv.visibility = View.VISIBLE
+            binding.mainMiniplayerPauseIv.visibility = View.GONE
+
+            mediaPlayer?.pause()
         }
     }
 
@@ -55,6 +131,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             songDB.songDao().getSong(songId)
         }
+
 
         Log.d("song ID", song.id.toString())
         setMiniPlayer(song)
@@ -100,9 +177,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setMiniPlayer(song: Song) {
+
         binding.mainMiniplayerTitleTv.text = song.title
         binding.mainMiniplayerSingerTv.text = song.singer
         binding.mainProgressSb.progress = (song.second * 1000 / song.playTime)
+
+        timer = Timer(song.playTime,song.isPlaying)
+        timer.start()
 
         val music = resources.getIdentifier(song.music, "raw", this.packageName)
 
@@ -114,6 +195,38 @@ class MainActivity : AppCompatActivity() {
         } else {
             binding.mainMiniplayerPauseIv.visibility = View.GONE
             binding.mainMiniplayerPlayIv.visibility = View.VISIBLE
+        }
+    }
+
+    inner class Timer(private val playTime: Int = 0, var isPlaying: Boolean = false) : Thread() {
+        private var second: Long = 0
+
+        @SuppressLint("SetTextI18n")
+        override fun run() {
+            try {
+                while (true) {
+                    if (second >= playTime) {
+                        break
+                    }
+
+                    if (isPlaying) {
+                        sleep(1000)
+                        second++
+
+                        runOnUiThread {
+//                            binding.musicplayerProgressSb.progress =
+//                                (second * 1000 / playTime).toInt()
+//                            binding.songStartTimeTv.text = String.format(
+//                                "%02d:%02d",
+//                                TimeUnit.SECONDS.toMinutes(second),
+//                                second % 60
+//                            )
+                        }
+                    }
+                }
+            } catch (e: InterruptedException) {
+                Log.d("SONG", "쓰레드가 죽었습니다. ${e.message}")
+            }
         }
     }
 

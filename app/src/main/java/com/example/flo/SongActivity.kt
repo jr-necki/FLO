@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 class SongActivity : AppCompatActivity() {
     lateinit var binding: ActivitySongBinding
 
-    //dlrj
+
     // 미디어 플레이어
     private var mediaPlayer: MediaPlayer? = null
     lateinit var timer: Timer
@@ -41,9 +41,11 @@ class SongActivity : AppCompatActivity() {
         songs[nowPos].isPlaying = false
         setPlayerStatus(false)
 
+        // sharedPreference에 현재 곡 저장
         val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
 
+        // 현재 곡의 id 저장
         editor.putInt("songId", songs[nowPos].id)
         editor.apply()
     }

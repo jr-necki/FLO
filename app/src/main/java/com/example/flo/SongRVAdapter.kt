@@ -29,8 +29,8 @@ class SongRVAdapter() :
     override fun onBindViewHolder(holder: SongRVAdapter.ViewHolder, position: Int) {
         holder.bind(songs[position])
         holder.binding.itemSongMoreIv.setOnClickListener {
-            removeSong(position)
             mItemClickListener.onRemoveSong(songs[position].id)
+            removeSong(position)
         }
     }
 

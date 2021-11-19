@@ -35,10 +35,10 @@ class SavedSongFragment : Fragment() {
         binding.lockerSavedSongRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         val songRVAdapter = SongRVAdapter()
-        //리스너 객체 생성 및 전달
 
+        //리스너 객체 생성 및 전달
         songRVAdapter.setMyItemClickListener(object : SongRVAdapter.MyItemClickListener{
-            override fun onRemoveSong(songId: Int) {
+            override fun onRemoveSong(songId: Int) { // 여기서 구현해줌
                 songDB.songDao().updateIsLikeById(false,songId)
             }
         })
