@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.flo.databinding.FragmentAlbumBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -16,6 +17,8 @@ class AlbumFragment : Fragment() {
 
     val information = arrayListOf("수록곡", "상세정보", "영상")
 
+    private var isLiked: Boolean=false
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -27,6 +30,8 @@ class AlbumFragment : Fragment() {
         val album = gson.fromJson(albumData, Album::class.java)
 
         setViews(album)
+        setClickListeners(album)
+
         //ROOM_DB
         val songs = getSongs(album.id) //앨범안에 있는 수록곡들을 불러옵니다.
         // 이 다음에 수록곡 프래그먼트에 songs을 전달해주는 식으로 사용하시면 됩니다.
@@ -54,6 +59,56 @@ class AlbumFragment : Fragment() {
         binding.albumMusicTitleTv.text = album.title.toString()
         binding.albumSingerNameTv.text = album.singer.toString()
         binding.albumAlbumIv.setImageResource(album.coverImg!!)
+
+        if(isLiked){
+            binding.albumLikeIv.setImageResource(R.drawable.ic_my_like_on)
+        }else{
+            binding.albumLikeIv.setImageResource(R.drawable.ic_my_like_off)
+        }
+    }
+
+    private fun setClickListeners(album:Album){
+        val userId: Int = getJwt()
+
+        binding.albumLikeIv.setOnClickListener {
+            if(isLiked){
+                binding.albumLikeIv.setImageResource(R.drawable.ic_my_like_off)
+                disLikedAlbum(userId,album.id)
+            }else{
+                binding.albumLikeIv.setImageResource(R.drawable.ic_my_like_on)
+                likeAlbum(userId,album.id)
+            }
+        }
+    }
+
+    private fun likeAlbum(userId: Int, albumId: Int){
+        val songDB = SongDatabase.getInstance(requireContext())!!
+        val like = Like(userId,albumId)
+
+        songDB.albumDao().likeAlbum((like))
+    }
+
+    private fun isLikedAlbum(albumId: Int):Boolean{
+        val songDB = SongDatabase.getInstance(requireContext())!!
+        val userId = getJwt()
+
+        val likedId: Int? = songDB.albumDao().isLikeAlbum(userId, albumId)
+
+        // true or false
+        return likedId != null
+    }
+
+    private fun disLikedAlbum(userId: Int,albumId: Int){
+        val songDB = SongDatabase.getInstance(requireContext())!!
+        songDB.albumDao().disLikeAlbum(userId,albumId)
+
+    }
+
+
+    private fun getJwt(): Int{
+        val spf = activity?.getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE)
+
+        return spf!!.getInt("jwt",0)
     }
 
     //ROOM_DB
