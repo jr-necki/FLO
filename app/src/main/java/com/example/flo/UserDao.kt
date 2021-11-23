@@ -14,4 +14,7 @@ interface UserDao {
 
     @Query("SELECT * FROM USERTABLE WHERE email = :email AND password =:password")
     fun getUser(email: String, password:String) : User? // 없을 수도 있으니 null처리
+
+    @Query("SELECT name From UserTable WHERE id =:id")
+    fun getThisUser(id: Int) :String?
 }

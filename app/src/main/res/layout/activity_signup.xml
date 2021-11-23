@@ -114,6 +114,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:background="@color/flo"
         android:id="@+id/finish_iv" />
+
+    <EditText
+        android:layout_width="380dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pw_check_et"
+        android:id="@+id/name_et"
+        android:layout_marginTop="10dp"
+        android:hint="닉네임"
+        android:textSize="15dp"
+        android:textColor="@color/song_player_bg"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -16,6 +16,7 @@ class LockerFragment : Fragment() {
 
     lateinit var binding: FragmentLockerBinding
     private val information = arrayListOf("저장한 곡", "음악파일","저장앨범")
+    lateinit var albumDB: SongDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,6 +24,7 @@ class LockerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLockerBinding.inflate(inflater, container, false)
+        albumDB = SongDatabase.getInstance(requireContext())!!
 
         val lockerAdapter = LockerViewpagerAdapter(this)
         binding.lockerContentVp.adapter = lockerAdapter
@@ -53,6 +55,8 @@ class LockerFragment : Fragment() {
             }
         }else{
             binding.lockerLoginTv.text="로그아웃"
+            val userName = albumDB.userDao().getThisUser(jwt)
+            binding.lockerUserNameTv.text = userName.toString()
 
             binding.lockerLoginTv.setOnClickListener{
                 logout()

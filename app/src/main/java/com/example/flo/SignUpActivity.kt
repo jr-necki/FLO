@@ -17,16 +17,16 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.finishIv.setOnClickListener {
             signUp()
-            //로그인 화면으로
-            finish()
+
         }
     }
 
     private fun getUser(): User {
         val email : String = binding.emailIdEt.text.toString()+"@"+binding.emailSiteEt.text.toString()
         val pwd : String = binding.pwEt.text.toString()
+        val name : String= binding.nameEt.text.toString()
 
-        return User(email,pwd)
+        return User(email,pwd,name)
     }
 
     private fun signUp(){
@@ -39,8 +39,17 @@ class SignUpActivity : AppCompatActivity() {
             return
         }
         val userDB = SongDatabase.getInstance(this)!!
-        userDB.userDao().insert(getUser())
         val users = userDB.userDao().getUsers()
+        for(index in users.indices){
+            if(binding.nameEt.text.toString()==(users[index].name)){
+                Toast.makeText(this,"이미 있는 이름입니다.", Toast.LENGTH_SHORT).show()
+                return
+            }
+        }
+
+        userDB.userDao().insert(getUser())
         Log.d("SINGUP",users.toString())
+        //로그인 화면으로
+        finish()
     }
 }
