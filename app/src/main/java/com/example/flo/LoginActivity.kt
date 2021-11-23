@@ -21,7 +21,6 @@ class LoginActivity : AppCompatActivity() {
         }
         binding.loginIv.setOnClickListener {
             login()
-
         }
     }
 

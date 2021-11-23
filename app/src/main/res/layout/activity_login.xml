@@ -27,7 +27,7 @@
         android:id="@+id/email_site_et"
         android:layout_width="180dp"
         android:layout_height="50dp"
-        android:text="직접입력"
+        android:hint="직접입력"
         android:textSize="15dp"
         android:textColor="@color/song_player_bg"
         app:layout_constraintRight_toRightOf="parent"
@@ -51,7 +51,7 @@
         android:id="@+id/email_id_et"
         android:layout_width="180dp"
         android:layout_height="50dp"
-        android:text=" 아이디(이메일)"
+        android:hint=" 아이디(이메일)"
         android:textSize="15dp"
         android:layout_marginEnd="5dp"
         android:layout_marginTop="20dp"
@@ -69,8 +69,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_id_et"
         android:id="@+id/pw_et"
-        android:text=" 비밀번호"
+        android:hint=" 비밀번호"
         android:textSize="15dp"
+        android:inputType="numberPassword"
         android:textColor="@color/song_player_bg"/>
     <ImageView
         android:id="@+id/pw_off_iv"

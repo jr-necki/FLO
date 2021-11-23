@@ -38,10 +38,8 @@ class SignUpActivity : AppCompatActivity() {
             Toast.makeText(this,"비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
             return
         }
-
         val userDB = SongDatabase.getInstance(this)!!
         userDB.userDao().insert(getUser())
-
         val users = userDB.userDao().getUsers()
         Log.d("SINGUP",users.toString())
     }
