@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
 }
 
@@ -44,12 +45,17 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.7'
     implementation 'com.android.support:design:30.0.0'
     implementation 'com.google.android.material:material:1.1.0'
-    implementation 'androidx.room:room-runtime:2.2.6'
-    implementation "com.google.dagger:hilt-android:2.28-alpha"
 
-    // kapt해결
-    implementation 'androidx.room:room-runtime:2.2.5'
-    annotationProcessor 'androidx.room:room-compiler:2.2.5'
+    //저장소 관련--
+    def room_version = "2.2.5"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+
+    //코틀린인 경우 아래 kapt 추가
+    kapt "androidx.room:room-compiler:$room_version"
+    kapt "android.arch.lifecycle:compiler:$room_version"
+    kapt "android.arch.persistence.room:compiler:$room_version"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

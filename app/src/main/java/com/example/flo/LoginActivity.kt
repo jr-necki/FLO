@@ -21,7 +21,7 @@ class LoginActivity : AppCompatActivity() {
         }
         binding.loginIv.setOnClickListener {
             login()
-            startMainActivity()
+
         }
     }
 
@@ -46,6 +46,7 @@ class LoginActivity : AppCompatActivity() {
             Log.d("LOGIN_GETUSER","userId: ${user.id}, $user")
             //발급받은 jwt를 저장해주는 함수
             saveJwt(user.id)
+            startMainActivity()
         }
         Toast.makeText(this,"회원 정보가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
 

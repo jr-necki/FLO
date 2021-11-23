@@ -29,7 +29,7 @@ interface AlbumDao {
 
     // userid와 albumid가 일치하는 like된 앨범을 삭제함
     @Query("DELETE  FROM LikeTable WHERE userId = :userId AND albumId=:albumId")
-    fun disLikeAlbum(userId: Int, albumId:Int):Int?
+    fun disLikeAlbum(userId: Int, albumId:Int)
 
     @Query("SELECT AT.* FROM LikeTable as LT LEFT JOIN ALBUMTABLE as AT ON LT.albumId= AT.id WHERE LT.userId =:userId")
     fun getLikedAlbums(userId: Int): List<Album>

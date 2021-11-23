@@ -21,5 +21,5 @@
         <activity android:name="com.example.flo.LoginActivity"/>
         <activity android:name="com.example.flo.SignUpActivity"/>
     </application>
-
+//왜안됨...
 </manifest>
