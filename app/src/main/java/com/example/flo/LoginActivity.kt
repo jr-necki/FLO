@@ -40,14 +40,15 @@ class LoginActivity : AppCompatActivity() {
         // 위의 정보가 디비에 있는지 확인
         val songDB = SongDatabase.getInstance(this)!!
         val user = songDB.userDao().getUser(email,pwd)
-
-        user?.let {
+        if(user != null){
             Log.d("LOGIN_GETUSER","userId: ${user.id}, $user")
             //발급받은 jwt를 저장해주는 함수
             saveJwt(user.id)
             startMainActivity()
+        }else{
+            Toast.makeText(this,"회원 정보가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
         }
-        Toast.makeText(this,"회원 정보가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
+
 
     }
     private fun startMainActivity(){

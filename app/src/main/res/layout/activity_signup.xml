@@ -64,6 +64,15 @@
         app:layout_constraintRight_toLeftOf="@id/email_site_et"
         app:layout_constraintTop_toBottomOf="@+id/signup_tv"
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="중복된 이메일 입니다."
+        android:textColor="#ff0000"
+        android:id="@+id/email_error_tv"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/email_id_et"
+        app:layout_constraintTop_toBottomOf="@id/email_id_et"/>
 
     <EditText
         android:layout_width="380dp"
@@ -98,6 +107,15 @@
         android:textSize="15dp"
         android:inputType="numberPassword"
         android:textColor="@color/song_player_bg"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호가 일치하지 않습니다."
+        android:textColor="#ff0000"
+        android:id="@+id/pw_error_tv"
+        app:layout_constraintStart_toStartOf="@+id/pw_check_et"
+        app:layout_constraintTop_toBottomOf="@id/pw_check_et"
+        android:visibility="gone"/>
     <ImageView
         android:id="@+id/pw_check_off_iv"
         android:layout_width="25dp"
@@ -130,6 +148,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="중복된 이름입니다."
+        android:textColor="#ff0000"
+        android:id="@+id/name_error_tv"
+        app:layout_constraintStart_toStartOf="@+id/name_et"
+        app:layout_constraintTop_toBottomOf="@id/name_et"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textSize="15dp"
         android:text="가입완료"
         android:textColor="@color/white"
@@ -137,4 +165,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@+id/finish_iv"
         app:layout_constraintTop_toTopOf="@id/finish_iv"/>
+
+    <ProgressBar
+        android:id="@+id/sign_up_loading_pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:indeterminateTint="@color/flo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
